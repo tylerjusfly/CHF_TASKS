@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .nav-hover {
+      @apply hover:bg-black hover:text-white hover:rounded cursor-pointer;
+    }
+  }
