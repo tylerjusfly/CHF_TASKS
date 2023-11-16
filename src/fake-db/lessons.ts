@@ -1,3 +1,9 @@
+export type LessonType =  {
+    lessonId : number,
+    lesson_topic : string
+}
+
+
 export const LessonDB = [
     {
         lessonId : 1,
