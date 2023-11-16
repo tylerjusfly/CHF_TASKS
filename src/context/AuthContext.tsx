@@ -7,6 +7,8 @@ import { createContext, useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { AuthValuesType, LoginParams, UserDataType } from "./types";
 import { UsersDb } from "@/fake-db/users";
+import { useAppDispatch } from "@/store/hook";
+import { doSetToStudentLesson } from "@/store/apps/students";
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -25,6 +27,7 @@ type Props = {
 };
 
 const AuthProvider = ({ children }: Props) => {
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState<UserDataType | null>(defaultProvider.user);
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading);
 
@@ -34,11 +37,18 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
       console.log("calling init auth");
-      const storedUser = window.localStorage.getItem("userData")!;
+      const storedUser = JSON.parse(window.localStorage.getItem("userData")!);
       if (storedUser) {
         setLoading(true);
 
-        setUser(storedUser as unknown as UserDataType);
+        // Fetch user courses
+        const allStartedCourses = JSON.parse(window.localStorage.getItem("studentLesson")!);
+
+        if (allStartedCourses) {
+          dispatch(doSetToStudentLesson(allStartedCourses));
+        }
+
+        setUser(storedUser as UserDataType);
         setLoading(false);
       } else {
         localStorage.removeItem("userData");
@@ -60,6 +70,8 @@ const AuthProvider = ({ children }: Props) => {
         if (found) {
           const redirectURL = found.role === "student" ? "students" : "/";
           router.replace(redirectURL as string);
+          setUser(found);
+          localStorage.setItem("userData", JSON.stringify(found));
         }
       } else {
         alert("failed to provide");
