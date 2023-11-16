@@ -24,7 +24,7 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
     if(auth.user){
 
       if (selectedLesson) {
-        dispatch(setOnGoingLesson({ lessonId: selectedLesson?.lessonId, userId: auth.user?.id, completed: false }));
+        dispatch(setOnGoingLesson({ lesson: selectedLesson, userId: auth.user?.id, completed: false }));
         // Close Modal, and redirect to lesson
         handleCancel()
       }

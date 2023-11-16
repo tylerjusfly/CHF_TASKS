@@ -1,10 +1,12 @@
+import { LessonType } from "@/fake-db/lessons"
+
 export interface IStudentState {
     StudentLesson : IStudentLesson[]
 }
 
 
 export interface IStudentLesson {
-    lessonId : number
+    lesson : LessonType
     userId: number
     completed: boolean
 }
