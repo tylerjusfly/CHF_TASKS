@@ -19,11 +19,15 @@ export const studentSlice = createSlice({
     },
 
     setOnGoingLesson: (state, action: PayloadAction<IStudentLesson>) => {
-      const newValues = [...state.StudentLesson, action.payload];
+      // find if lesson is available before
+      let isLesson = state.StudentLesson.find((item) => item.lesson.lessonId === action.payload.lesson.lessonId);
+      if (!isLesson) {
+        const newValues = [...state.StudentLesson, action.payload];
 
-      state.StudentLesson = newValues;
+        state.StudentLesson = newValues;
 
-      localStorage.setItem("studentLesson", JSON.stringify(newValues));
+        localStorage.setItem("studentLesson", JSON.stringify(newValues));
+      }
     },
   },
   extraReducers: (builder) => {},

@@ -6,6 +6,7 @@ import { LessonType } from "@/fake-db/lessons";
 import { useAppDispatch } from "@/store/hook";
 import { setOnGoingLesson } from "@/store/apps/students";
 import { useAuth } from "@/hooks/useAuth";
+import IdeCode from "./IdeCode";
 
 type Props = {
   open: boolean;
@@ -14,10 +15,15 @@ type Props = {
 };
 
 const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLesson }) => {
-  const [loading, setLoading] = useState(false);
+  
+  const [OpenIDE, setOpenIDE] = useState(false)
   const dispatch = useAppDispatch();
 
   const auth = useAuth()
+
+  const toggleIDE = () => {
+    setOpenIDE(!OpenIDE)
+  }
 
   const startALesson = () => {
     // create a new array and add users lessons
@@ -26,7 +32,8 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
       if (selectedLesson) {
         dispatch(setOnGoingLesson({ lesson: selectedLesson, userId: auth.user?.id, completed: false }));
         // Close Modal, and redirect to lesson
-        handleCancel()
+        // handleCancel()
+        toggleIDE()
       }
     }
     else{
@@ -39,7 +46,7 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
     <>
       <Modal
         open={open}
-        title="Title"
+        title={selectedLesson?.lesson_topic}
         onCancel={handleCancel}
         footer={[
           <button className="btn btn-blue" onClick={startALesson}>
@@ -47,12 +54,18 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
           </button>,
         ]}
       >
-        <p>{selectedLesson?.lesson_topic}</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <h3>{selectedLesson?.lessonQuestion}</h3>
+
+        <div className="mt-3">
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{selectedLesson?.tags}</span>
+
+        </div>
+        
       </Modal>
+
+      {
+        OpenIDE && <IdeCode open={OpenIDE} handleIDE={toggleIDE} />
+      }
     </>
   );
 };
