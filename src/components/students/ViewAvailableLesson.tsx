@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/store/hook";
 import { setCurrentLesson, setOnGoingLesson } from "@/store/apps/students";
 import { useAuth } from "@/hooks/useAuth";
 import IdeCode from "./IdeCode";
+import { notifyError } from "@/utils/toasts/notifyError";
 
 type Props = {
   open: boolean;
@@ -36,12 +37,11 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
         dispatch(setCurrentLesson(selectedLesson));
 
         dispatch(setOnGoingLesson({ lesson: selectedLesson, userId: auth.user?.id, completed: false }));
-        // Close Modal, and redirect to lesson
-        // handleCancel()
+
         toggleIDE();
       }
     } else {
-      alert("error Starting Lesson");
+      notifyError("error Starting Lesson");
     }
   };
 

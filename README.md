@@ -20,12 +20,11 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-
-
 External Packages
 
 - react-feather
-- Antd 
-
+- Antd
+- react-hot-toast
+- axios
 
 All the components / reusable code snippets
