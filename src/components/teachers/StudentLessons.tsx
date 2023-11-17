@@ -22,10 +22,6 @@ const StudentsLessons = () => {
     setOpen(false);
   };
 
-  const retake = () => {
-    notifySuccess("Called");
-  };
-
   return (
     <Fragment>
       <h3>All Students Lesson</h3>

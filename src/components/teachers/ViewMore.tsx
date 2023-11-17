@@ -1,5 +1,4 @@
 import { UsersDb } from "@/fake-db/users";
-import { setCurrentLesson } from "@/store/apps/students";
 import { IStudentLesson } from "@/store/apps/students/types";
 import { useAppDispatch } from "@/store/hook";
 import { Divider, Modal } from "antd";
@@ -7,6 +6,8 @@ import React, { useState } from "react";
 import { CheckCircle, Clock } from "react-feather";
 import SolutionViewer from "./SolutionViewer";
 import { setCurrentLessonId } from "@/store/apps/teachers";
+import Input from "./commons/CommentBox";
+import { notifySuccess } from "@/utils/toasts/notifySuccess";
 
 type Props = {
   open: boolean;
@@ -30,19 +31,32 @@ function ViewMoreLesson({ open, selectedLesson, handleCancel }: Props) {
     }
   };
 
+  const AddComment = () => {
+    notifySuccess("dddjdj");
+  };
+
   return (
     <Modal
       open={open}
+      width={900}
       title={selectedLesson?.lesson.lesson_topic}
       onCancel={handleCancel}
-      footer={[
-        <button className="btn btn-blue mr-2 cursor-pointer" onClick={() => toggleIDE(selectedLesson)}>
-          View Solution
-        </button>,
-        <button className="btn btn-blue" disabled>
-          Discard solution
-        </button>,
-      ]}
+      footer={
+        <div className="flex justify-between items-center">
+          <div className="self-center mb-5">
+            <Input name="Comment here" save={() => AddComment()} />
+          </div>
+
+          <div className="self-center space-y-2">
+            <button className="btn btn-blue mr-2 cursor-pointer" onClick={() => toggleIDE(selectedLesson)}>
+              View Solution
+            </button>
+            <button className="btn btn-blue" disabled>
+              Discard solution
+            </button>
+          </div>
+        </div>
+      }
     >
       <h3>{selectedLesson?.lesson.lessonQuestion}</h3>
 
@@ -98,8 +112,12 @@ function ViewMoreLesson({ open, selectedLesson, handleCancel }: Props) {
           </div>
         </div>
       ) : (
-        <h2>Not found</h2>
+        <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <span className="font-medium">Not Found!</span> Go back to home and view again.
+        </div>
       )}
+
+      <Divider>Comment Section</Divider>
 
       {OpenIDE && <SolutionViewer open={OpenIDE} handleIDE={toggleIDE} />}
     </Modal>

@@ -16,7 +16,7 @@ const NavigationBar = () => {
           <li className={`px-2 py-1 nav-hover ${pathName === "/teachers" && "bg-black text-white rounded"}`}>Home</li>
         </Link>
         <Link href="/teachers/lesson/track">
-          <li className={`px-2 py-1 nav-hover ${pathName === "/students/available" && "bg-black text-white rounded"}`}>Track Lessons</li>
+          <li className={`px-2 py-1 nav-hover ${pathName === "/teachers/lesson/track" && "bg-black text-white rounded"}`}>Track Lessons</li>
         </Link>
 
         <button onClick={auth.logout} className="px-2 py-1 nav-hover">
