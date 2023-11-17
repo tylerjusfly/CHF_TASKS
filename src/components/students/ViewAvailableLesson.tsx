@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Modal } from "antd";
 import { LessonType } from "@/fake-db/lessons";
 import { useAppDispatch } from "@/store/hook";
-import { setOnGoingLesson } from "@/store/apps/students";
+import { setCurrentLesson, setOnGoingLesson } from "@/store/apps/students";
 import { useAuth } from "@/hooks/useAuth";
 import IdeCode from "./IdeCode";
 
@@ -15,31 +15,34 @@ type Props = {
 };
 
 const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLesson }) => {
-  
-  const [OpenIDE, setOpenIDE] = useState(false)
+  const [OpenIDE, setOpenIDE] = useState(false);
   const dispatch = useAppDispatch();
 
-  const auth = useAuth()
+  const auth = useAuth();
 
   const toggleIDE = () => {
-    setOpenIDE(!OpenIDE)
-  }
+    if (OpenIDE) {
+      setOpenIDE(false);
+      dispatch(setCurrentLesson(null));
+    } else {
+      setOpenIDE(true);
+    }
+  };
 
   const startALesson = () => {
     // create a new array and add users lessons
-    if(auth.user){
-
+    if (auth.user) {
       if (selectedLesson) {
+        dispatch(setCurrentLesson(selectedLesson));
+
         dispatch(setOnGoingLesson({ lesson: selectedLesson, userId: auth.user?.id, completed: false }));
         // Close Modal, and redirect to lesson
         // handleCancel()
-        toggleIDE()
+        toggleIDE();
       }
+    } else {
+      alert("error Starting Lesson");
     }
-    else{
-      alert('error Starting Lesson')
-    }
-
   };
 
   return (
@@ -57,15 +60,13 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
         <h3>{selectedLesson?.lessonQuestion}</h3>
 
         <div className="mt-3">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{selectedLesson?.tags}</span>
-
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            #{selectedLesson?.tags}
+          </span>
         </div>
-        
       </Modal>
 
-      {
-        OpenIDE && <IdeCode open={OpenIDE} handleIDE={toggleIDE} />
-      }
+      {OpenIDE && <IdeCode open={OpenIDE} handleIDE={toggleIDE} />}
     </>
   );
 };

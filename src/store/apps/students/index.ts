@@ -1,11 +1,12 @@
 // ** Redux Imports
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IStudentLesson, IStudentState } from "./types";
-
-// import { getFromLocalStorage } from "@/components/core/utils/storage";
+import { LessonType } from "@/fake-db/lessons";
+import { notifySuccess } from "@/utils/toasts/notifySuccess";
 
 const initialState: IStudentState = {
   StudentLesson: [],
+  currentLesson: null,
 };
 
 export const studentSlice = createSlice({
@@ -29,10 +30,26 @@ export const studentSlice = createSlice({
         localStorage.setItem("studentLesson", JSON.stringify(newValues));
       }
     },
+
+    setCurrentLesson: (state, action: PayloadAction<LessonType | null>) => {
+      state.currentLesson = action.payload;
+    },
+
+    updateLessonStatus: (state, action: PayloadAction<IStudentLesson>) => {
+      if (state.StudentLesson.some((item) => item.lesson.lessonId === action.payload.lesson.lessonId)) {
+        // filter it out and add it again
+        const otherLessons = state.StudentLesson.filter((item) => item.lesson.lessonId !== action.payload.lesson.lessonId);
+
+        const newVals = [...otherLessons, action.payload];
+        state.StudentLesson = newVals;
+
+        localStorage.setItem("studentLesson", JSON.stringify(newVals));
+      }
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { setOnGoingLesson, doSetToStudentLesson } = studentSlice.actions;
+export const { setOnGoingLesson, doSetToStudentLesson, setCurrentLesson, updateLessonStatus } = studentSlice.actions;
 
 export default studentSlice.reducer;

@@ -1,10 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Drawer, Modal } from "antd";
+import { Drawer } from "antd";
 import Editor from "@monaco-editor/react";
 import axios from "axios";
 import OutputWindow from "./OutputWindow";
+import { notifySuccess } from "@/utils/toasts/notifySuccess";
+import { notifyError } from "@/utils/toasts/notifyError";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { updateLessonStatus } from "@/store/apps/students";
+import { useAuth } from "@/hooks/useAuth";
 
 const RAPID_API_HOST = "judge0-ce.p.rapidapi.com";
 const RAPID_API_KEY = "1e21171e7cmsh84a2ae759069572p150da6jsn797f6688d8dc";
@@ -15,42 +20,30 @@ const RAPID_API_URL = "https://judge0-ce.p.rapidapi.com/submissions";
 // label: "JavaScript (Node.js 12.14.0)",
 // value: "javascript",
 
-// const axios = require('axios');
-
-// const options = {
-//   method: 'GET',
-//   url: 'https://judge0-ce.p.rapidapi.com/about',
-//   headers: {
-//     'X-RapidAPI-Key': '1e21171e7cmsh84a2ae759069572p150da6jsn797f6688d8dc',
-//     'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
-//   }
-// };
-
-// try {
-// 	const response = await axios.request(options);
-// 	console.log(response.data);
-// } catch (error) {
-// 	console.error(error);
-// }
-
 type Props = {
   open: boolean;
   handleIDE: () => void;
 };
 const IdeCode = ({ open, handleIDE }: Props) => {
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState("// start your code after this comment");
+  const currentLesson = useAppSelector((store) => store.students.currentLesson);
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState<boolean>(false);
+
+  const auth = useAuth();
 
   const handleEditorChange = (value: string | undefined) => {
     if (value) {
       setValue(value);
     }
-    // onChange("code", value);
   };
 
   const handleCompile = () => {
+    // Mimick save to db before compiling code
+    localStorage.setItem(`LESSON-${currentLesson?.lessonId}`, value);
+
     setProcessing(true);
     const formData = {
       language_id: 63,
@@ -109,21 +102,41 @@ const IdeCode = ({ open, handleIDE }: Props) => {
       } else {
         setProcessing(false);
         setOutputDetails(response.data);
-        alert("Compiled Successfully!");
-        //   showSuccessToast(`Compiled Successfully!`)
+        notifySuccess("Compiled Successfully!");
+
+        // getting rid of typescript fear if currentLesson is null
+        if (currentLesson) {
+          dispatch(
+            updateLessonStatus({
+              lesson: currentLesson,
+              userId: auth.user?.id as number /**type assert */,
+              completed: true,
+              codestatus: response.data?.status?.description,
+              runtime: response.data?.time,
+            })
+          );
+        }
+
         console.log("response.data", response.data);
         return;
       }
     } catch (err) {
       console.log("err", err);
       setProcessing(false);
-      alert("Compiled failed!");
-      // showErrorToast();
+      notifyError("Compiled failed!");
     }
   };
 
+  useEffect(() => {
+    // fetch code if available
+    const code = localStorage.getItem(`LESSON-${currentLesson?.lessonId}`);
+
+    if (code) {
+      setValue(code);
+    }
+  }, []);
+
   return (
-   
     <Drawer title="Code Editor" placement="right" onClose={handleIDE} size="large" open={open}>
       <Editor
         height="80vh"
@@ -138,7 +151,6 @@ const IdeCode = ({ open, handleIDE }: Props) => {
       <div className="flex flex-shrink-0 w-[80%] flex-col my-5">
         <OutputWindow outputDetails={outputDetails} />
         <div className="flex flex-col items-center">
-            
           <button
             onClick={handleCompile}
             disabled={!value}
