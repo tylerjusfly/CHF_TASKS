@@ -29,9 +29,10 @@ External Packages
 
 All the components / reusable code snippets
 
-Future Features
+Pending Features
 [] Disable Lesson
 [] Retake Lesson
+[]
 
 Logins
 username : olamide
