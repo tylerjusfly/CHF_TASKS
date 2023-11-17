@@ -9,6 +9,8 @@ import { AuthValuesType, LoginParams, UserDataType } from "./types";
 import { UsersDb } from "@/fake-db/users";
 import { useAppDispatch } from "@/store/hook";
 import { doSetToStudentLesson } from "@/store/apps/students";
+import { notifyError } from "@/utils/toasts/notifyError";
+import { notifySuccess } from "@/utils/toasts/notifySuccess";
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -67,18 +69,21 @@ const AuthProvider = ({ children }: Props) => {
       if (params) {
         // find user
         const found = UsersDb.find((user) => user.username === params.username);
-        if (found) {
+        if (found && params.password === found.password) {
           const redirectURL = found.role === "student" ? "students" : "teachers";
           router.replace(redirectURL as string);
           setUser(found);
           localStorage.setItem("userData", JSON.stringify(found));
+          notifySuccess(`${found.role} Login Successfull`);
+        } else {
+          notifyError("Invalid credentials");
         }
       } else {
-        alert("failed to provide");
+        notifyError("Input cannot be empty");
       }
     } catch (error) {
       console.log(error, "err");
-      alert("Login Failed");
+      notifyError("Login Failed");
     }
   };
 
