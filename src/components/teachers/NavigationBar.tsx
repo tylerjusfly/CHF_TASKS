@@ -12,15 +12,13 @@ const NavigationBar = () => {
   return (
     <div className="border border-gray-600 mx-16 my-7 p-3 rounded">
       <ul className="flex flex-row gap-8">
-        <Link href="/students">
-          <li className={`px-2 py-1 nav-hover ${pathName === "/students" && "bg-black text-white rounded"}`}>Home</li>
+        <Link href="/teachers">
+          <li className={`px-2 py-1 nav-hover ${pathName === "/teachers" && "bg-black text-white rounded"}`}>Home</li>
         </Link>
-        <Link href="/students/available">
-          <li className={`px-2 py-1 nav-hover ${pathName === "/students/available" && "bg-black text-white rounded"}`}>
-            Available Lessons
-          </li>
+        <Link href="/teachers/lesson/track">
+          <li className={`px-2 py-1 nav-hover ${pathName === "/students/available" && "bg-black text-white rounded"}`}>Track Lessons</li>
         </Link>
-        <li className="px-2 py-1 nav-hover">Finished Lessons</li>
+
         <button onClick={auth.logout} className="px-2 py-1 nav-hover">
           LogOut
         </button>

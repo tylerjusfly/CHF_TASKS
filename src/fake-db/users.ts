@@ -4,8 +4,8 @@ export const UsersDb: UserDataType[] = [
   {
     id: 1,
     role: "student",
-    fullname: "ola chuke",
-    username: "olasco",
+    fullname: "ola toluwani",
+    username: "olamide",
     password: "ladygaga",
     avatar: null,
   },

@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { LessonDB, LessonType } from "@/fake-db/lessons";
 import ViewAvailableLesson from "../shared/ViewAvailableLesson";
 
-const AvailableLessons = () => {
+const AllLessons = () => {
   const [open, setOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<LessonType | null>(null);
 
@@ -18,7 +18,7 @@ const AvailableLessons = () => {
 
   return (
     <Fragment>
-      <h3 className="font-semibold">Available Lessons</h3>
+      <h3 className="font-semibold">All Lessons</h3>
 
       <div className="flex flex-wrap justify-center gap-6 mt-5 ">
         {LessonDB.map((lesson) => (
@@ -44,4 +44,4 @@ const AvailableLessons = () => {
   );
 };
 
-export default AvailableLessons;
+export default AllLessons;

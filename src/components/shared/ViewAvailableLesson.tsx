@@ -1,12 +1,11 @@
 "use client";
-
 import React, { useState } from "react";
 import { Modal } from "antd";
 import { LessonType } from "@/fake-db/lessons";
 import { useAppDispatch } from "@/store/hook";
 import { setCurrentLesson, setOnGoingLesson } from "@/store/apps/students";
 import { useAuth } from "@/hooks/useAuth";
-import IdeCode from "./IdeCode";
+import IdeCode from "../students/IdeCode";
 import { notifyError } from "@/utils/toasts/notifyError";
 
 type Props = {
@@ -51,11 +50,15 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
         open={open}
         title={selectedLesson?.lesson_topic}
         onCancel={handleCancel}
-        footer={[
-          <button className="btn btn-blue" onClick={startALesson}>
-            Start Lesson
-          </button>,
-        ]}
+        footer={
+          auth.user?.role === "student"
+            ? [
+                <button className="btn btn-blue" onClick={startALesson}>
+                  Start Lesson
+                </button>,
+              ]
+            : [<button className="btn btn-blue">Disable Lesson</button>]
+        }
       >
         <h3>{selectedLesson?.lessonQuestion}</h3>
 

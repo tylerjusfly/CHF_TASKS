@@ -2,11 +2,13 @@
 
 import { useAppSelector } from "@/store/hook";
 import React, { Fragment, useState } from "react";
-import ViewMyLesson from "./ViewMyLesson";
+// import ViewMyLesson from "./ViewMyLesson";
 import { notifySuccess } from "@/utils/toasts/notifySuccess";
 import { IStudentLesson } from "@/store/apps/students/types";
+import ViewMyLesson from "../students/ViewMyLesson";
+import ViewMoreLesson from "./ViewMore";
 
-const OngoingLessons = () => {
+const StudentsLessons = () => {
   const StudentLesson = useAppSelector((store) => store.students.StudentLesson);
   const [open, setOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<IStudentLesson | null>(null);
@@ -26,7 +28,7 @@ const OngoingLessons = () => {
 
   return (
     <Fragment>
-      <h3>Ongoing Lessons</h3>
+      <h3>All Students Lesson</h3>
 
       <div className="flex flex-wrap justify-center gap-6 mt-5 ">
         {StudentLesson.map((item) => (
@@ -53,9 +55,9 @@ const OngoingLessons = () => {
         ))}
       </div>
 
-      <ViewMyLesson open={open} handleCancel={handleCancel} selectedLesson={selectedLesson} retakeLesson={retake} />
+      <ViewMoreLesson open={open} handleCancel={handleCancel} selectedLesson={selectedLesson} />
     </Fragment>
   );
 };
 
-export default OngoingLessons;
+export default StudentsLessons;

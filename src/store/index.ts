@@ -3,10 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // ** Reducers
 import students from "./apps/students";
+import teachers from "./apps/teachers";
 
 export const store = configureStore({
   reducer: {
-    students
+    students,
+    teachers,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

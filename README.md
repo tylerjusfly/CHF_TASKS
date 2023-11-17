@@ -28,3 +28,16 @@ External Packages
 - axios
 
 All the components / reusable code snippets
+
+Future Features
+[] Disable Lesson
+[] Retake Lesson
+
+Logins
+username : olamide
+password: password
+role: student
+
+username : choko1
+password: password
+role: teacher
