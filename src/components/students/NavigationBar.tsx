@@ -20,7 +20,7 @@ const NavigationBar = () => {
             Available Lessons
           </li>
         </Link>
-        <li className="px-2 py-1 nav-hover">Finished Lessons</li>
+        {/* <li className="px-2 py-1 nav-hover">Finished Lessons</li> */}
         <button onClick={auth.logout} className="px-2 py-1 nav-hover">
           LogOut
         </button>

@@ -26,8 +26,8 @@ type Props = {
 };
 const IdeCode = ({ open, handleIDE }: Props) => {
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState("// start your code after this comment");
   const currentLesson = useAppSelector((store) => store.students.currentLesson);
+  const [value, setValue] = useState(currentLesson?.code as string);
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState<boolean>(false);

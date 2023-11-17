@@ -2,7 +2,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IStudentLesson, IStudentState } from "./types";
 import { LessonType } from "@/fake-db/lessons";
-import { notifySuccess } from "@/utils/toasts/notifySuccess";
 
 const initialState: IStudentState = {
   StudentLesson: [],

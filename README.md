@@ -27,7 +27,7 @@ External Packages
 - react-hot-toast
 - axios
 
-All the components / reusable code snippets
+Code Structure
 
 Pending Features
 [] Disable Lesson
