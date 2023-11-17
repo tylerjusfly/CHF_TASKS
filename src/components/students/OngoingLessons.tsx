@@ -21,7 +21,7 @@ const OngoingLessons = () => {
   };
 
   const retake = () => {
-    notifySuccess("Called");
+    notifySuccess("Coming soon...");
   };
 
   return (
@@ -52,6 +52,12 @@ const OngoingLessons = () => {
           </div>
         ))}
       </div>
+
+      {StudentLesson.length === 0 && (
+        <Fragment>
+          <h3 className="text-center font-semibold">No active data</h3>
+        </Fragment>
+      )}
 
       <ViewMyLesson open={open} handleCancel={handleCancel} selectedLesson={selectedLesson} retakeLesson={retake} />
     </Fragment>
