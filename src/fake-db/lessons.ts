@@ -21,14 +21,15 @@ export const LessonDB = [
   },
   {
     lessonId: 3,
-    lesson_topic: "Introduction to css",
-    lessonQuestion: "write a function that sums two number.",
+    lesson_topic: "What is between?",
+    lessonQuestion:
+      "Complete the function that takes two integers (a, b, where a < b) and return an array of all integers between the input parameters, including them.",
     tags: "javascript",
   },
   {
     lessonId: 4,
-    lesson_topic: "Introduction to Javscript",
-    lessonQuestion: "write a function that sums two number.",
+    lesson_topic: "You Can't Code Under Pressure #1",
+    lessonQuestion: "Code as fast as you can! You need to double the integer and return it.",
     tags: "javascript",
   },
 ];
