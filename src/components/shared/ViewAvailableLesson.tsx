@@ -51,13 +51,13 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
         title={selectedLesson?.lesson_topic}
         onCancel={handleCancel}
         footer={
-          auth.user?.role === "student"
-            ? [
-                <button className="btn btn-blue" onClick={startALesson}>
-                  Start Lesson
-                </button>,
-              ]
-            : [<button className="btn btn-blue">Disable Lesson</button>]
+          auth.user?.role === "student" ? (
+            <button className="btn btn-blue" onClick={startALesson}>
+              Start Lesson
+            </button>
+          ) : (
+            <button className="btn btn-blue">Disable Lesson</button>
+          )
         }
       >
         <h3>{selectedLesson?.lessonQuestion}</h3>

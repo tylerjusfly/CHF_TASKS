@@ -66,6 +66,7 @@ const AuthProvider = ({ children }: Props) => {
 
   const handleLogin = (params: LoginParams) => {
     try {
+      setLoading(true);
       if (params) {
         // find user
         const found = UsersDb.find((user) => user.username === params.username);
@@ -76,6 +77,7 @@ const AuthProvider = ({ children }: Props) => {
           localStorage.setItem("userData", JSON.stringify(found));
           notifySuccess(`${found.role} Login Successfull`);
         } else {
+          setLoading(false);
           notifyError("Invalid credentials");
         }
       } else {

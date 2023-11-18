@@ -18,11 +18,11 @@ function ViewMyLesson({ open, selectedLesson, retakeLesson, handleCancel }: Prop
       open={open}
       title={selectedLesson?.lesson.lesson_topic}
       onCancel={handleCancel}
-      footer={[
+      footer={
         <button className="btn btn-blue" onClick={retakeLesson} disabled>
           Retake Lesson
-        </button>,
-      ]}
+        </button>
+      }
     >
       <h3>{selectedLesson?.lesson.lessonQuestion}</h3>
 

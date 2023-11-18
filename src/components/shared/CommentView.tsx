@@ -11,8 +11,8 @@ const CommentView = ({ comments }: Props) => {
     <Fragment>
       {comments !== undefined ? (
         <>
-          {comments.map((comment) => (
-            <div className="flex mt-4">
+          {comments.map((comment, i) => (
+            <div className="flex mt-4" key={i}>
               <div className="w-14 h-14 rounded-full bg-purple-400/50 flex-shrink-0 flex items-center justify-center">
                 <img className="h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/43.jpg" alt="" />
               </div>

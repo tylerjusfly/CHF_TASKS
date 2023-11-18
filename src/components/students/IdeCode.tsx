@@ -135,6 +135,8 @@ const IdeCode = ({ open, handleIDE }: Props) => {
     if (code) {
       setValue(code);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

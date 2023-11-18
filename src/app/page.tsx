@@ -1,7 +1,7 @@
 "use client";
 import { useAuth } from "@/hooks/useAuth";
 import { FormEvent, useState } from "react";
-import { UserCheck } from "react-feather";
+import { Loader, UserCheck } from "react-feather";
 
 export default function Home() {
   const [username, setUsername] = useState("olamide");
@@ -52,6 +52,7 @@ export default function Home() {
               />
             </div>
             <button className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full rounded">
+              {auth.loading && <Loader className="animate-spin" />}
               Login
             </button>
           </form>
