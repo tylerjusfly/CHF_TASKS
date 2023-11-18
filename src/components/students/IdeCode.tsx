@@ -113,6 +113,7 @@ const IdeCode = ({ open, handleIDE }: Props) => {
               completed: true,
               codestatus: response.data?.status?.description,
               runtime: response.data?.time,
+              comments: [],
             })
           );
         }
