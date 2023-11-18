@@ -80,3 +80,12 @@ Clicking the start lesson button opens an IDE to write your code
 At the bottom of your IDE, the Complie and execute button compiles your code and returns an output in the output box.
 
 `Note Compiling the code also serves as the submit button that submits your lesson and mark it as completed`
+
+### Teacher's Flow
+
+![image](https://github.com/tylerjusfly/CHF_TASKS/assets/53145644/c0312b73-8641-4443-b4a5-24e26fe9e272)
+
+After teacher is logged in, going to the Track lessons tab displays all enrolled lessons. (Complete or Incomplete) , selecting a lesson provides us with a modal that contains lesson details , student details, comment box and buttons to view student solution or discard solution if lesson solution is unacceptable
+
+![image](https://github.com/tylerjusfly/CHF_TASKS/assets/53145644/950fe614-68eb-4514-9b8e-a896b08cc1e6)
+
