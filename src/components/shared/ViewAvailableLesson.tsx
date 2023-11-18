@@ -35,7 +35,7 @@ const ViewAvailableLesson: React.FC<Props> = ({ open, handleCancel, selectedLess
       if (selectedLesson) {
         dispatch(setCurrentLesson(selectedLesson));
 
-        dispatch(setOnGoingLesson({ lesson: selectedLesson, userId: auth.user?.id, completed: false }));
+        dispatch(setOnGoingLesson({ lesson: selectedLesson, userId: auth.user?.id, completed: false, comments: [] }));
 
         toggleIDE();
       }

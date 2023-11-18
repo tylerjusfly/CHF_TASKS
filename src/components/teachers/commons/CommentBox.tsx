@@ -3,6 +3,8 @@ import React from "react";
 type Props = {
   name: string;
   save: () => void;
+  value: string;
+  onChange: any;
 };
 
 const Input = ({ name, save, ...rest }: Props) => {

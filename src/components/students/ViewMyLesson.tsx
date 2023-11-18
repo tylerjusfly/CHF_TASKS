@@ -1,7 +1,8 @@
 import { IStudentLesson } from "@/store/apps/students/types";
 import { Divider, Modal } from "antd";
-import React from "react";
+import React, { Fragment } from "react";
 import { CheckCircle, Clock } from "react-feather";
+import CommentView from "../shared/CommentView";
 
 type Props = {
   open: boolean;
@@ -56,6 +57,12 @@ function ViewMyLesson({ open, selectedLesson, retakeLesson, handleCancel }: Prop
           <span className="block text-sm font-medium">{selectedLesson?.runtime || "Unavailable"}</span>
         </div>
       </div>
+
+      <Divider>Comment Section</Divider>
+
+      <Fragment>
+        <CommentView comments={selectedLesson?.comments} />
+      </Fragment>
     </Modal>
   );
 }

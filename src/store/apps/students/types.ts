@@ -11,4 +11,11 @@ export interface IStudentLesson {
   completed: boolean;
   codestatus?: string;
   runtime?: string;
+  comments: Icomment[];
+}
+
+export interface Icomment {
+  name: string;
+  comment_time: Date;
+  text: string;
 }

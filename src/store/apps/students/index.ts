@@ -1,7 +1,8 @@
 // ** Redux Imports
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IStudentLesson, IStudentState } from "./types";
+import { IStudentLesson, IStudentState, Icomment } from "./types";
 import { LessonType } from "@/fake-db/lessons";
+import { notifyError } from "@/utils/toasts/notifyError";
 
 const initialState: IStudentState = {
   StudentLesson: [],
@@ -45,10 +46,21 @@ export const studentSlice = createSlice({
         localStorage.setItem("studentLesson", JSON.stringify(newVals));
       }
     },
+
+    setComments: (state, action: PayloadAction<{ id: number; comment: Icomment }>) => {
+      const lessonIndex = state.StudentLesson.findIndex((lesson) => lesson.lesson.lessonId === action.payload.id);
+
+      if (lessonIndex !== -1) {
+        state.StudentLesson[lessonIndex].comments?.push(action.payload.comment);
+
+        localStorage.setItem("studentLesson", JSON.stringify(state.StudentLesson));
+      } else {
+        notifyError(`Lesson with ID ${action.payload.id} not found.`);
+      }
+    },
   },
-  extraReducers: (builder) => {},
 });
 
-export const { setOnGoingLesson, doSetToStudentLesson, setCurrentLesson, updateLessonStatus } = studentSlice.actions;
+export const { setOnGoingLesson, doSetToStudentLesson, setCurrentLesson, updateLessonStatus, setComments } = studentSlice.actions;
 
 export default studentSlice.reducer;
