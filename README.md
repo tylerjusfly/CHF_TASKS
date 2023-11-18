@@ -37,10 +37,12 @@ all auths on user can be found in the `src/context/AuthContext`
 
 all json data can be found in the `src/fake-db`
 
-Pending Features
-[] Disable Lesson
-[] Retake Lesson
-[]
+### Pending Features
+
+[x] -Disable Lesson
+
+[x] -Retake Lesson
+
 
 ## Logins
 
