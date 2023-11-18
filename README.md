@@ -60,3 +60,23 @@ username : choko1
 password: password
 
 role: teacher
+
+# Project Flow
+
+### Student Flow
+
+![image](https://github.com/tylerjusfly/CHF_TASKS/assets/53145644/1a09d9ba-56f8-4adc-b0ad-5edee7b09233)
+
+As a logged In student, the home page is where you can find lesson you have enrolled in.
+
+To enroll for a new lesson, you can click on the available lessons tab and click on any lessons you'd like to start.
+![image](https://github.com/tylerjusfly/CHF_TASKS/assets/53145644/d0b81734-f8e8-4d34-b914-9c782c343404)
+
+![image](https://github.com/tylerjusfly/CHF_TASKS/assets/53145644/52d961ea-8cb8-4af9-abe5-1999edbc9968)
+
+Clicking the start lesson button opens an IDE to write your code
+![image](https://github.com/tylerjusfly/CHF_TASKS/assets/53145644/1b433b58-80ca-4337-8734-8c4e13e0be0b)
+
+At the bottom of your IDE, the Complie and execute button compiles your code and returns an output in the output box.
+
+`Note Compiling the code also serves as the submit button that submits your lesson and mark it as completed`
