@@ -46,10 +46,17 @@ all json data can be found in the `src/fake-db`
 
 ## Logins
 
+### Student Login
 username : olamide
+
 password: password
+
 role: student
 
+### Teacher Login
+
 username : choko1
+
 password: password
+
 role: teacher
