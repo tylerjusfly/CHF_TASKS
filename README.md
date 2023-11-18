@@ -20,21 +20,30 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-External Packages
+## External Packages
 
 - react-feather
 - Antd
 - react-hot-toast
 - axios
 
-Code Structure
+## Code Structure
+
+everything students can be found in the `src/components/students`
+
+everything teachers can be found in the `src/components/teachers`
+
+all auths on user can be found in the `src/context/AuthContext`
+
+all json data can be found in the `src/fake-db`
 
 Pending Features
 [] Disable Lesson
 [] Retake Lesson
 []
 
-Logins
+## Logins
+
 username : olamide
 password: password
 role: student
