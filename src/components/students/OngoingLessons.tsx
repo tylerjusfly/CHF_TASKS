@@ -25,7 +25,7 @@ const OngoingLessons = () => {
   };
 
   return (
-    <Fragment>
+    <main>
       <h3>Ongoing Lessons</h3>
 
       <div className="flex flex-wrap justify-center gap-6 mt-5 ">
@@ -60,7 +60,7 @@ const OngoingLessons = () => {
       )}
 
       <ViewMyLesson open={open} handleCancel={handleCancel} selectedLesson={selectedLesson} retakeLesson={retake} />
-    </Fragment>
+    </main>
   );
 };
 

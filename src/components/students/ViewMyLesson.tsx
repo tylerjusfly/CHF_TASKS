@@ -1,3 +1,4 @@
+"use client";
 import { IStudentLesson } from "@/store/apps/students/types";
 import { Divider, Modal } from "antd";
 import React, { Fragment } from "react";
