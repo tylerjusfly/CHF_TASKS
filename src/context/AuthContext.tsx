@@ -76,6 +76,16 @@ const AuthProvider = ({ children }: Props) => {
           router.replace(redirectURL as string);
           setUser(found);
           localStorage.setItem("userData", JSON.stringify(found));
+
+          // Fetch user courses if Students
+          // if (found && found.role === "student") {
+          const allStartedCourses = JSON.parse(window.localStorage.getItem("studentLesson")!);
+
+          if (allStartedCourses) {
+            dispatch(doSetToStudentLesson(allStartedCourses));
+          }
+          // }
+
           notifySuccess(`${found.role} Login Successfull`);
         } else {
           setLoading(false);
