@@ -52,8 +52,10 @@ export default function Home() {
               />
             </div>
             <button className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full rounded">
-              {auth.loading && <Loader className="animate-spin" />}
-              Login
+              <span className="flex flex-row justify-center">
+                {auth.loading && <Loader className="animate-spin" />}
+                Login
+              </span>
             </button>
           </form>
         </div>

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import Image from "next/image";
 import { Icomment } from "@/store/apps/students/types";
 import { formatDate } from "@/utils/format";
+import { User } from "react-feather";
 
 type Props = {
   comments: Icomment[] | undefined;
@@ -15,7 +15,7 @@ const CommentView = ({ comments }: Props) => {
           {comments.map((comment, i) => (
             <div className="flex mt-4" key={i}>
               <div className="w-14 h-14 rounded-full bg-purple-400/50 flex-shrink-0 flex items-center justify-center">
-                <Image className="h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/43.jpg" alt="" />
+                <User size={20} />
               </div>
 
               <div className="ml-3">

@@ -71,6 +71,7 @@ const AuthProvider = ({ children }: Props) => {
         // find user
         const found = UsersDb.find((user) => user.username === params.username);
         if (found && params.password === found.password) {
+          setLoading(false);
           const redirectURL = found.role === "student" ? "students" : "teachers";
           router.replace(redirectURL as string);
           setUser(found);
