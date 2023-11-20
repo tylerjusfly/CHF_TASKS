@@ -49,7 +49,7 @@ all json data can be found in the `src/fake-db`
 ### Student Login
 username : olamide
 
-password: password
+password: ladygaga
 
 role: student
 
@@ -57,7 +57,7 @@ role: student
 
 username : choko1
 
-password: password
+password: ladygaga
 
 role: teacher
 
